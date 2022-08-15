@@ -1,8 +1,8 @@
 class startPlugin {
     apply(compiler) {
         // 注册run钩子
-        compiler.hooks.run.tap('Running', () => {
-            console.log('开启编译')
+        compiler.hooks.emit.tap('emit', () => {
+            compiler.assets['README.md'] = '我是readme'
         })
     }
 }
