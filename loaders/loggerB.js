@@ -1,4 +1,4 @@
-function loaderB(source) {
+function loggerB(source) {
     return source + console.log('loaderB-----------//')
 }
-module.exports = loaderB
+module.exports = loggerB

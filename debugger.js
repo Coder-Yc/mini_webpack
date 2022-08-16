@@ -5,5 +5,5 @@ const options = require('./webpack.config.js')
 const compiler = webpack(options)
 //4. 调用run方法开始真正的编译
 compiler.run((err, stats) => {
-    console.log(stats)
+    // console.log(stats)
 })

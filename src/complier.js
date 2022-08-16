@@ -4,6 +4,8 @@ const traverse = require('@babel/traverse').default
 const generator = require('@babel/generator').default
 const types = require('@babel/types')
 const { cwd } = require('node:process')
+const loaderRunner = require('./loader-run.js')
+const { runLoaders } = require('loader-runner')
 const fs = require('fs')
 const path = require('path')
 
@@ -54,7 +56,7 @@ class Complier {
         // 9.把每一个chunk转换成一个单独的文件加入到输出列表 this.assets对象key:文件名 value:文件的内容
         let output = this.options.output
         this.chunks.forEach((chunk) => {
-            console.log(chunk.name)
+            // console.log(chunk.name)
             let filename = output.filename.replace('[name]', chunk.name)
 
             this.assets[filename] = getSource(chunk)
@@ -95,24 +97,26 @@ class Complier {
         //2.获取需要处理的loader
         const rules = this.options.module?.rules
         let loaders = []
-        if (!rules) {
+
+        if (rules) {
             for (let rule in rules) {
                 if (rules[rule].test.test(entryName)) {
                     loaders = [...loaders, ...rules[rule].use]
                 }
             }
-            //3. 执行loader
-            if (loaders.length !== 0) {
-                for (const loader of loaders) {
-                    if (typeof loader === 'string') {
-                        targetOriginCode = require(loaders[loader])(
-                            targetOriginCode
-                        )
-                    } else {
-                        targetOriginCode = loader(targetOriginCode)
-                    }
-                }
+
+            loaders = loaders.map(joinSourcePath)
+            const options = {
+                resource: entryPath,
+                loaders
             }
+            /**
+             * loader-runner模块使用loaders
+             */
+            loaderRunner(options, (err, result) => {
+                // console.log(result)
+                console.log(result.resourceBuffer.toString())
+            })
         }
         //7.找出入口依赖的模块,递归处理
         let moduleId = './' + path.relative(rootPath, entryPath)
@@ -156,6 +160,9 @@ class Complier {
         })
         return module
     }
+}
+function joinSourcePath(loader) {
+    return path.join(rootPath, 'loaders', `${loader.name}.js`)
 }
 function getSource(chunk) {
     return `

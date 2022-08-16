@@ -1,7 +1,7 @@
 const startPlugin = require('./plugins/run-plugin.js')
 const donePlugin = require('./plugins/Done-plugin.js')
-const loaderA = require('./loaders/loggera-loader')
-const loaderB = require('./loaders/loggerb-loader')
+const loggerB = require('./loaders/loggerB')
+const loggerA = require('./loaders/loggerA')
 const emitPlugin = require('./plugins/emit-plugins')
 const path = require('path')
 module.exports = {
@@ -18,13 +18,13 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json']
     },
-    // module: {
-    //     rules: [
-    //         {
-    //             test: /\.js$/,
-    //             use: [loaderA, loaderB]
-    //         }
-    //     ]
-    // },
-    plugins: [new startPlugin(), new donePlugin(), new emitPlugin()]
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: [loggerA, loggerB]
+            }
+        ]
+    }
+    // plugins: [new startPlugin(), new donePlugin(), new emitPlugin()]
 }

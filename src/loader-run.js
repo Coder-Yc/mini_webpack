@@ -115,11 +115,12 @@ function iterateNormalLoaders(
         return finalCallbacks(null, args)
     }
     const currentLoader = loaderContext.loaders[loaderContext.loaderIndex]
-    if (currentLoader.pitchExecuted) {
+    if (currentLoader.normalExecuted) {
         loaderContext.loaderIndex--
         return iterateNormalLoaders(
             processOptions,
             loaderContext,
+            args,
             finalCallbacks
         )
     }
@@ -169,7 +170,7 @@ function runSyncOrAsync(pitchFunction, loaderContext, args, callback) {
 }
 
 function runLoaders(options, callback) {
-    let resource = options.resource //获取要加载的资源 src/index.jss
+    let resource = options.resource //获取要加载的资源 src/index.js
     let loaders = options.loaders || [] // 要结果哪些loader处理
     let loaderContext = options.context || {} //loader执行上下文
     let readResource = options.readResource || fs.readFile //读取文件内容的方法
