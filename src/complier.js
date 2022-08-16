@@ -3,7 +3,6 @@ const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 const generator = require('@babel/generator').default
 const types = require('@babel/types')
-// import { cwd } from 'node:process'
 const { cwd } = require('node:process')
 const fs = require('fs')
 const path = require('path')

@@ -1,4 +1,5 @@
 const Complier = require('./complier.js')
+const loaderRunner = require('loader-runner');
 function webpack(options) {
     //1. 合并参数
     let shellOptions = process.argv.slice(2).reduce((config, args) => {
