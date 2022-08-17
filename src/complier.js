@@ -27,7 +27,7 @@ class Complier {
     }
     run(callFn) {
         //5. 根据entry找到入口
-        let entry = {}
+        let entry = {} 
         const entries = this.options.entry
 
         if (typeof entries === 'string') {
@@ -58,7 +58,6 @@ class Complier {
         this.chunks.forEach((chunk) => {
             // console.log(chunk.name)
             let filename = output.filename.replace('[name]', chunk.name)
-
             this.assets[filename] = getSource(chunk)
         })
         //在写入文件前最后触发事件

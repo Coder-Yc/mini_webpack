@@ -4,13 +4,19 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
+        // {
+        //     "type": "pwa-node",
+        //     "request": "launch",
+        //     "name": "Launch Program",
+        //     "skipFiles": ["<node_internals>/**"],
+        //     "program": "${workspaceFolder}/debugger.js"
+        // },
         {
             "type": "pwa-node",
             "request": "launch",
             "name": "Launch Program",
             "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}/debugger.js"
+            "program": "${workspaceFolder}/doc/SyncLoopHook.js"
         }
     ]
 }
