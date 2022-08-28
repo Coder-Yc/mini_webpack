@@ -1,32 +1,54 @@
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
-     (() => {
-        var __webpack_modules__ = {
-            {
-                "./index.js": ((module) => {
-                    console.log('this is title');
-                })
-            }
-        }
-        var __webpack_module_cache__ = {}
-        function __webpack_require__(moduleId) {
-            var cachedModule = __webpack_module_cache__[moduleId]
-            if (cachedModule !== undefined) {
-                return cachedModule.exports
-            }
-            var module = (__webpack_module_cache__[moduleId] = {
-                exports: {}
-            })
-            __webpack_modules__[moduleId](
-                module,
-                module.exports,
-                __webpack_require__
-            )
-            return module.exports
-        }
-        var __webpack_exports__ = {}
-        ;(() => {
-        const title = require("./title.js");
+/***/ "./test/title.js":
+/*!***********************!*\
+  !*** ./test/title.js ***!
+  \***********************/
+/***/ (() => {
 
-console.log(title + '111');
-    })()
-    })()
+console.log('this is title')
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!***********************!*\
+  !*** ./test/index.js ***!
+  \***********************/
+const title = __webpack_require__(/*! ./title */ "./test/title.js")
+console.log(title + '111')
+
+})();
+
+/******/ })()
+;

@@ -1,5 +1,6 @@
-const webpack = require('./webpack.js')
+const webpack = require('./webpack')
 //初始化参数,从配置文件中读取参数,然后和shell里的参数合并得到最终的配置文件
+debugger
 const options = require('../webpack.config.js')
 //用参数去初始化一个compiler
 const compiler = webpack(options)

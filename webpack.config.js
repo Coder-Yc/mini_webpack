@@ -1,13 +1,11 @@
-const startPlugin = require('./plugins/run-plugin.js')
-const donePlugin = require('./plugins/Done-plugin.js')
-const loggerB = require('./loaders/loggerB')
-const loggerA = require('./loaders/loggerA')
-const emitPlugin = require('./plugins/emit-plugins')
+// const loggerB = require('./loaders/loggerB')
+// const loggerA = require('./loaders/loggerA')
+const zipPlugin = require('./plugins/ZipPlugin.js')
 const path = require('path')
 module.exports = {
     mode: 'development',
     devtool: false,
-    entry: './index.js',
+    entry: './test/index.js',
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js'
@@ -18,13 +16,17 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json']
     },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                use: [loggerA, loggerB]
-            }
-        ]
-    }
-    // plugins: [new startPlugin(), new donePlugin(), new emitPlugin()]
+    // module: {
+    //     rules: [
+    //         {
+    //             test: /\.js$/,
+    //             use: [loggerA, loggerB]
+    //         }
+    //     ]
+    // },
+    plugins: [
+        new zipPlugin({
+            filename: 'zipfile'
+        })
+    ]
 }
