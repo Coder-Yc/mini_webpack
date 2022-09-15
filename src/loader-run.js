@@ -7,7 +7,7 @@ function createLoaderObject(request) {
         pitch: null, //loader本身的pitch函数
         raw: false, //是否转成字符串 否则就是一个buffer
         data: {}, // 每一个 loader都有一个自定义数据对象,用来存放一些自定义信息,pitch和normal通信
-        pitchExecuted: false, 
+        pitchExecuted: false,
         normalExecuted: false
     }
     let normal = require(loaderObj.request) //加载模块
@@ -200,7 +200,7 @@ function runLoaders(options, callback) {
     let readResource = options.readResource || fs.readFile //读取文件内容的方法
     //把每一个loader从每一个loader绝对路径 转成一个loader对像
     loaders = loaders.map(createLoaderObject)
-    //loaderContext是所有loaders在处理资源时,共享的一种状态 
+    //loaderContext是所有loaders在处理资源时,共享的一种状态
     //loaderIndex 是一个指针，它控制了所有 loaders 的 pitch 与 normal 函数的执行
     loaderContext.resource = resource
     loaderContext.readResource = readResource
